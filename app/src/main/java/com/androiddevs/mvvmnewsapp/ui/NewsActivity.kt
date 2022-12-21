@@ -6,16 +6,21 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.androiddevs.mvvmnewsapp.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.androiddevs.mvvmnewsapp.databinding.ActivityNewsBinding
+
 
 class NewsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityNewsBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news)
-        val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.newsNavHostFragment) as NavHostFragment
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        binding = ActivityNewsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.bottomNavigationView.setupWithNavController(
+            (supportFragmentManager.findFragmentById(R.id.newsNavHostFragment) as NavHostFragment)
+                .findNavController())
 
     }
 }
