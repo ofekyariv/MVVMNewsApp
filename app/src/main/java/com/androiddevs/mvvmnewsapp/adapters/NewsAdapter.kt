@@ -1,12 +1,10 @@
 package com.androiddevs.mvvmnewsapp.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.databinding.ItemArticlePreviewBinding
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.bumptech.glide.Glide
@@ -36,18 +34,17 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             false
         )
         return ArticleViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(holder.binding.ivArticleImage)
-            holder.binding.tvSource.text = article.source.name
+            holder.binding.tvSource.text = article.source?.name
             holder.binding.tvTitle.text = article.title
             holder.binding.tvDescription.text = article.description
-            holder.binding.tvPublishedAt.text = article.publishedAt
-            setOnItemClickListener {
+            //holder.binding.tvPublishedAt.text = article.publishedAt
+            holder.itemView.setOnClickListener {
                 onItemClickListener?.let { it(article) }
             }
         }
